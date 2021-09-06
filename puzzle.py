@@ -1,12 +1,12 @@
 matrix_size = int(input('Enter 4 or 5 for Matrix Size: '))
 matrix = [[None for i in range(matrix_size)] for j in range(matrix_size)]
-solution = input('Enter x,y coordinates of the cell to be solved, e.g. 0,0 for bottom left corner: ')
+solutionstr = input('Enter x,y coordinates of the cell to be solved, e.g. 0,0 for bottom left corner: ')
 # apparently using subscriptable list is clunky as there is a more elegant way using maps
-solution = list(map(int, solution.split(',')))
+solution = [int(n) for n in solutionstr.split(',')]
 solved = False
 while solved == False:
-    clue = input('Give me clues as x,y coordinates and shape number, e.g. 2,1,0 for a 0 shape in third cell right and second up from bottom left: ')
-    clue = list(map(int, clue.split(',')))
+    cluestr = input('Give me clues as x,y coordinates and shape number, e.g. 2,1,0 for a 0 shape in third cell right and second up from bottom left: ')
+    clue = [int (n) for n in cluestr.split(',')]
     matrix[clue[0]][clue[1]]=clue[2]
  # scan the x axis using the same y coordinate as given clue
     for x in range(matrix_size):
