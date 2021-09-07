@@ -1,5 +1,6 @@
 def new_input(clue, matrix):
     matrix[clue[0]][clue[1]] = clue[2]
+    if clue[0] == solution[0] and clue[1] == solution[1]:  return clue[2]
  # scan the x axis using the same y coordinate as given clue
     for x in range(matrix_size):
         # process only blank cells, skip otherwise
@@ -14,7 +15,6 @@ def new_input(clue, matrix):
                 if matrix[x][yi] in possibilities:
                     possibilities.remove(matrix[x][yi])
             if len(possibilities) == 1:
-                if x == solution[0] and clue[1] == solution[1]: return possibilities[0]
                 new_input([x,clue[1],possibilities[0]], matrix)
 
     for y in range(matrix_size):
@@ -30,9 +30,8 @@ def new_input(clue, matrix):
                 if matrix[clue[0]][yi] in possibilities:
                     possibilities.remove(matrix[clue[0]][yi])
             if len(possibilities) == 1:
-                if clue[0] == solution[0] and y == solution[1]: return possibilities[0]
                 new_input([clue[0],y,possibilities[0]], matrix)
-
+            
 
 matrix_size = int(input('Enter 4 or 5 for Matrix Size: '))
 matrix = [[None for i in range(matrix_size)] for j in range(matrix_size)]
