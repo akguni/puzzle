@@ -1,6 +1,6 @@
-def new_input(clue, matrix):
+def new_input(clue, matrix, solved):
     matrix[clue[0]][clue[1]] = clue[2]
-    if clue[0] == solution[0] and clue[1] == solution[1]:  return clue[2]
+    if clue[0] == solution[0] and clue[1] == solution[1]: return True 
  # scan the x axis using the same y coordinate as given clue
     for x in range(matrix_size):
         # process only blank cells, skip otherwise
@@ -15,7 +15,7 @@ def new_input(clue, matrix):
                 if matrix[x][yi] in possibilities:
                     possibilities.remove(matrix[x][yi])
             if len(possibilities) == 1:
-                new_input([x,clue[1],possibilities[0]], matrix)
+                solved = new_input([x,clue[1],possibilities[0]], matrix, solved)
 
     for y in range(matrix_size):
     # process only blank cells, skip otherwise
@@ -30,8 +30,9 @@ def new_input(clue, matrix):
                 if matrix[clue[0]][yi] in possibilities:
                     possibilities.remove(matrix[clue[0]][yi])
             if len(possibilities) == 1:
-                new_input([clue[0],y,possibilities[0]], matrix)
-            
+                solved = new_input([clue[0],y,possibilities[0]], matrix, solved)
+
+    return solved     
 
 matrix_size = int(input('Enter 4 or 5 for Matrix Size: '))
 matrix = [[None for i in range(matrix_size)] for j in range(matrix_size)]
@@ -42,7 +43,7 @@ while True:
     cluestr = input('Give me clues as x,y coordinates and shape number, e.g. 2,1,0 for a 0 shape in third cell right and second up from bottom left: ')
     clue = [int(n) for n in cluestr.split(',')]
     
-    solved = new_input(clue, matrix)
-    if solved != None:
-        print(solved)
+    solved = new_input(clue, matrix, False)
+    if solved:
+        print(matrix[solution[0]][solution[1]])
         break
