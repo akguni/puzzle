@@ -1,3 +1,5 @@
+import re
+
 def new_input(clue, matrix, solved):
     matrix[clue[0]][clue[1]] = clue[2]
     if clue[0] == solution[0] and clue[1] == solution[1]: return True 
@@ -34,13 +36,17 @@ def new_input(clue, matrix, solved):
 
     return solved     
 
-matrix_size = int(input('Enter 4 or 5 for Matrix Size: '))
+while re.match()
+matrix_size = int(input('Enter Matrix Size (only one number, e.g. 5): '))
+
 matrix = [[None for i in range(matrix_size)] for j in range(matrix_size)]
+print('please use 0 index throughout this program, i.e. all sequences start from 0 instead of 1')
 solutionstr = input('Enter x,y coordinates of the cell to be solved, e.g. 0,0 for bottom left corner: ')
 # apparently using subscriptable list is clunky as there is a more elegant way using maps
 solution = [int(n) for n in solutionstr.split(',')]
+print('Now please give me clues as x,y coordinates and shape number, e.g. 2,1,0 for a 0 shape in third cell right and second up from bottom left')
 while True:
-    cluestr = input('Give me clues as x,y coordinates and shape number, e.g. 2,1,0 for a 0 shape in third cell right and second up from bottom left: ')
+    cluestr = input('Enter 3 comma separated values (x,y,shape): ')
     clue = [int(n) for n in cluestr.split(',')]
     
     solved = new_input(clue, matrix, False)
